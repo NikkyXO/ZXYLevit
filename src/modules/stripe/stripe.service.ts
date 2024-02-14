@@ -11,9 +11,12 @@ export class StripeService {
   private stripeClient: Stripe;
 
   constructor(private readonly configService: ConfigService) {
-    this.stripeClient = new Stripe(this.configService.get('STRIPE_API_KEY'), {
-      apiVersion: '2023-10-16',
-    });
+    this.stripeClient = new Stripe(
+      this.configService.get('STRIPE_SECRET_KEY'),
+      {
+        apiVersion: '2023-10-16',
+      },
+    );
   }
 
   async createCheckoutSession(

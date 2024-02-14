@@ -1,7 +1,8 @@
-import { Controller, Req, Post, Header } from '@nestjs/common';
+import { Controller, Req, Post, Header, Body } from '@nestjs/common';
 import { StripeService } from './stripe.service';
 import Stripe from 'stripe';
 import { UserService } from '../user/user.service';
+import { StripePaymentDto } from './dto/payment-dto';
 
 @Controller('webhook')
 export class StripeController {
@@ -46,5 +47,16 @@ export class StripeController {
     } catch (err) {
       throw new Error(`Webhook Error: ${err.message}`);
     }
+  }
+
+  @Post('stripe/make-payments')
+  async makePayment(@Body() req: StripePaymentDto) {
+    const session = this.stripeService.createCheckoutSession(
+      req.userId,
+      req.subName,
+      req.amount,
+      req.email,
+    );
+    return session;
   }
 }
