@@ -5,7 +5,6 @@ import { UserService } from './user.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './schemas/user.schema';
 import { JwtService } from '@nestjs/jwt';
-// import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
