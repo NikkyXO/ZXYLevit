@@ -9,9 +9,11 @@ export class CreateUserDto {
   @IsString()
   firstName: string;
 
+  @ApiProperty()
   @IsString()
   lastName: string;
 
+  @ApiProperty()
   @IsString()
   address: string;
 

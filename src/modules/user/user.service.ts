@@ -31,7 +31,12 @@ export class UserService {
   }
 
   async findAll() {
-    return await this.userModel.find().exec();
+    const allUsers = await this.userModel.find().exec();
+    const res = allUsers.map((user) => {
+      const { password, ...rest } = user['_doc'];
+      return rest;
+    });
+    return res;
   }
 
   async findOneById(id: string) {
@@ -44,9 +49,19 @@ export class UserService {
   }
 
   async updateUser(id: string, updateUserDto: UpdateUserDto) {
-    return await this.userModel.findByIdAndUpdate(id, updateUserDto, {
-      new: true,
-    });
+    const updatedUser = await this.userModel.findByIdAndUpdate(
+      id,
+      updateUserDto,
+      {
+        new: true,
+      },
+    );
+    if (updatedUser) {
+      const { password, ...rest } = updatedUser['_doc'];
+      return rest;
+    }
+
+    return null;
   }
 
   async updateUserPayment(id: string, isPaid: boolean = true) {

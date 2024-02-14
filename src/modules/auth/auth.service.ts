@@ -84,7 +84,7 @@ export class AuthService {
           expiresIn: configExp,
           secret: this.configService.get<string>('JWT_SECRET'),
         });
-        return { rest, token };
+        return { rest, expires, token };
       } else {
         return null;
       }
