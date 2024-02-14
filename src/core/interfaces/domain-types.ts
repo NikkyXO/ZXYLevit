@@ -1,1 +1,1 @@
-export type ErrorDomain = 'users' | 'generic';
+export type ErrorDomain = 'users' | 'stripe' | 'auth' | 'generic';

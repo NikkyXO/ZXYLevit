@@ -89,7 +89,12 @@ export class AuthService {
         return null;
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw new CustomException(
+        'auth',
+        `${error.errors[0]?.message}`,
+        `${error.message}`,
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 }

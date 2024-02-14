@@ -10,7 +10,7 @@ async function bootstrap() {
   const options = new DocumentBuilder()
     .setTitle('test-interview')
     .setDescription(
-      'NOTE!!!: Please Use Postman to test With base url: "https://busy-pear-toad-shoe.cyclic.app" , Authentication test on swagger not reliable!',
+      'NOTE!!!: Authentication testing on swagger doc not reliable! Please Use Postman to test With base url: "https://busy-pear-toad-shoe.cyclic.app"',
     )
     .setVersion('1.0.0')
     .addBearerAuth()

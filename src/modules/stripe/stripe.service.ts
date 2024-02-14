@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { CustomException } from 'src/core/custom.exception';
 import Stripe from 'stripe';
 
 export interface EnabledEvent {
@@ -53,7 +54,12 @@ export class StripeService {
       });
       return { redirectUrl: checkoutSession.url };
     } catch (error) {
-      throw error;
+      throw new CustomException(
+        'stripe',
+        `${error.errors[0]?.message}`,
+        `${error.message}`,
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 }
